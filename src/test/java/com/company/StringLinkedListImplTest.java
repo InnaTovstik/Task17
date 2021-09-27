@@ -7,19 +7,18 @@ import org.junit.jupiter.api.Test;
 public class StringLinkedListImplTest {
 
     private static StringLinkedListImpl subject;
-    private String str1 = "aaa";
-    private String str2 = "bbb";
-    private String str3 = "ccc";
-    private int size = 3;
-    private static String strToFirst = "ddd";
-    private static String strToLast = "zzz";
-    private static String strToIndex = "nnn";
+    private final String  str1 = "aaa";
+    private final String str2 = "bbb";
+    private final String str3 = "ccc";
+    private final int size = 3;
+    private final String strToFirst = "ddd";
+    private final String strToLast = "zzz";
+    private final String strToIndex = "nnn";
 
 
     @BeforeEach
-     public void setSubject(){
+     public void setUp(){
         subject = new StringLinkedListImpl();
-        //заполняем данными нашего метода
         subject.add(str1, 0);
         subject.add(str2, 1);
         subject.add(str3, 2);
@@ -27,7 +26,6 @@ public class StringLinkedListImplTest {
 
     @Test
     public void shouldAddFirstToEmptyList(){
-        // создаем пустой список
         subject = new StringLinkedListImpl();
         subject.addFirst(strToFirst);
         Assertions.assertEquals(strToFirst, subject.getFirst());
