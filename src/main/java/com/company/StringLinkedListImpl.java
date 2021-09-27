@@ -140,7 +140,7 @@ class StringLinkedListImpl implements StringLinkedList {
             reWriteIndex();
             return firstValue;
         }
-   }
+    }
 
     @Override
     public String remove(int i) {
@@ -161,7 +161,6 @@ class StringLinkedListImpl implements StringLinkedList {
         reWriteIndex();
         return valueCurrent;
     }
-
 
     @Override
     public String removeLast() {
@@ -192,4 +191,3 @@ class StringLinkedListImpl implements StringLinkedList {
         }
     }
 }
-
