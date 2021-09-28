@@ -47,19 +47,17 @@ class StringLinkedListImpl implements StringLinkedList {
     }
 
     public StringLinkedListImpl() {
-        first = null;
-        last = null;
     }
 
     @Override
     public void addFirst(String s) {
-
         Node newNode = new Node(s);
         if (first != null) {
             Node oldFirstNode = first;
             oldFirstNode.setPrevious(newNode);
             newNode.setNext(oldFirstNode);
             first = newNode;
+            last.setIndex(size());
             reWriteIndex();
         } else {
             newNode.setNext(null);
@@ -87,6 +85,7 @@ class StringLinkedListImpl implements StringLinkedList {
             newNode.setPrevious(current.getPrevious());
             current.setPrevious(newNode);
             prev.setNext(newNode);
+            last.setIndex(size());
             reWriteIndex();
         }
     }
@@ -99,8 +98,9 @@ class StringLinkedListImpl implements StringLinkedList {
             Node newNode = new Node(s);
             last.setNext(newNode);
             newNode.setPrevious(last);
-            newNode.setIndex(last.getIndex() + 1);
+            newNode.setIndex(size() + 1);
             last = newNode;
+            reWriteIndex();
         }
     }
 
@@ -140,7 +140,7 @@ class StringLinkedListImpl implements StringLinkedList {
             reWriteIndex();
             return firstValue;
         }
-    }
+   }
 
     @Override
     public String remove(int i) {
@@ -181,13 +181,7 @@ class StringLinkedListImpl implements StringLinkedList {
         if (first == null || last == null) {
             return 0;
         } else {
-            int size = 1;
-            Node node = first;
-            while (node.getNext() != null) {
-                node = node.getNext();
-                size++;
-            }
-            return size;
+            return last.getIndex() + 1;
         }
     }
 }
