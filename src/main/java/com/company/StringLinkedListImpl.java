@@ -4,6 +4,7 @@ class StringLinkedListImpl implements StringLinkedList {
 
     private Node first;
     private Node last;
+    private int elementsCount;
 
     public Node findNode(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index > size()) {
@@ -52,12 +53,12 @@ class StringLinkedListImpl implements StringLinkedList {
     @Override
     public void addFirst(String s) {
         Node newNode = new Node(s);
+        elementsCount++;
         if (first != null) {
             Node oldFirstNode = first;
             oldFirstNode.setPrevious(newNode);
             newNode.setNext(oldFirstNode);
             first = newNode;
-            last.setIndex(size());
             reWriteIndex();
         } else {
             newNode.setNext(null);
@@ -85,7 +86,7 @@ class StringLinkedListImpl implements StringLinkedList {
             newNode.setPrevious(current.getPrevious());
             current.setPrevious(newNode);
             prev.setNext(newNode);
-            last.setIndex(size());
+            elementsCount++;
             reWriteIndex();
         }
     }
@@ -98,7 +99,7 @@ class StringLinkedListImpl implements StringLinkedList {
             Node newNode = new Node(s);
             last.setNext(newNode);
             newNode.setPrevious(last);
-            newNode.setIndex(size() + 1);
+            elementsCount++;
             last = newNode;
             reWriteIndex();
         }
@@ -129,6 +130,7 @@ class StringLinkedListImpl implements StringLinkedList {
 
     @Override
     public String removeFirst() {
+        elementsCount--;
         if (last.getIndex() == 1) {
             first = null;
             last = null;
@@ -140,7 +142,7 @@ class StringLinkedListImpl implements StringLinkedList {
             reWriteIndex();
             return firstValue;
         }
-   }
+    }
 
     @Override
     public String remove(int i) {
@@ -158,12 +160,14 @@ class StringLinkedListImpl implements StringLinkedList {
         Node next = curr.getNext();
         prev.setNext(next);
         next.setPrevious(prev);
+        elementsCount--;
         reWriteIndex();
         return valueCurrent;
     }
 
     @Override
     public String removeLast() {
+        elementsCount--;
         if (size() == 1) {
             first = null;
             last = null;
@@ -178,10 +182,6 @@ class StringLinkedListImpl implements StringLinkedList {
 
     @Override
     public int size() {
-        if (first == null || last == null) {
-            return 0;
-        } else {
-            return last.getIndex() + 1;
-        }
+        return elementsCount;
     }
 }
